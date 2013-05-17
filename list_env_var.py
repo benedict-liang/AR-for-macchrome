@@ -15,7 +15,8 @@ class ListEnvVar:
             f.close()
         except IOError:
             return {}
-        print env_variables
+
+        # Nested function to set dictionary
         def getSetIDDict(env_variables, setid):
             for variable_set in env_variables.variableset:
                 if setid != variable_set.setid:
@@ -28,6 +29,6 @@ class ListEnvVar:
                 result_dict['url_to_watch'] = variable_set.url_to_watch
 
                 return result_dict
-
             return {}
+
         return getSetIDDict(env_variables, setid)

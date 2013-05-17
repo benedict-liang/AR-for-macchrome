@@ -4,21 +4,23 @@ import environmentvariables_pb2
 
 # Hardcoded values
 # Must change using some sort of data representation (protobuf? json?)
+def PromptForVariables(variable_set):
+    # TODO: Need to check for uniqueness
+    variable_set.setid = raw_input("Enter unique project name: ")
+    variable_set.chromedriver_path = raw_input("Enter path to chromedriver: ")
+    variable_set.url_to_watch = raw_input("Enter URL to observe: ")
+
 
 # Main procedure
 def main():
-    is_valid = False
 
-    while not is_valid:
-        chromedriver_path = raw_input("Enter path to chromedriver: ")
-        url_input = raw_input("Enter URL to observe: ")
+    env_variables = environmentvariables_pb2.EnvironmentVariables()
 
-        if chromedriver_path and url_input:
-            is_valid = True
+    # Add a variable set
+    PromptForVariables(env_variables.variableset.add())
 
     f = open("EnvFile", "wb")
-    f.write(chromedriver_path + "\n")
-    f.write(url_input)
+    f.write(env_variables.SerializeToString())
     f.close()
 
 if __name__ == '__main__':

@@ -22,7 +22,7 @@ Website: [https://code.google.com/p/protobuf/](https://code.google.com/p/protobu
 
 Usage
 -----
-Set Environment Variables (Add as many as you like, but each with a unique setid)
+Set Environment Variables. Add as many as you like, but each with a **unique** `setid`. The `setid` could preferably be the **project name**.
 
 ```bash
 $ python add_env_var.py

@@ -1,0 +1,9 @@
+message VariableSet {
+  required string setid = 1;
+  optional string chromedriver_path = 2;
+  optional string url_to_watch = 3;
+}
+
+message EnvironmentVariables {
+  repeated VariableSet variableset = 1;
+}

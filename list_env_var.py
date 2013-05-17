@@ -5,6 +5,7 @@ import sys
 
 class ListEnvVar:
 
+    @staticmethod
     def getEnvVarDict(filename, setid):
         env_variables = environmentvariables_pb2.EnvironmentVariables()
 
@@ -14,20 +15,19 @@ class ListEnvVar:
             f.close()
         except IOError:
             return {}
+        print env_variables
+        def getSetIDDict(env_variables, setid):
+            for variable_set in env_variables.variableset:
+                if setid != variable_set.setid:
+                    continue
 
-        return __getSetIDDict(env_variables, setid)
+                result_dict = {}
 
-    def __getSetIDDict(env_variables, setid):
-        for variable_set in env_variables:
-            if setid != variable_set.setid:
-                continue
+                result_dict['setid'] = variable_set.setid
+                result_dict['chromedriver_path'] = variable_set.chromedriver_path
+                result_dict['url_to_watch'] = variable_set.url_to_watch
 
-            result_dict = {}
+                return result_dict
 
-            result_dict['setid'] = variable_set.setid
-            result_dict['chromedriver_path'] = variable_set.chromedriver_path
-            result_dict['url_to_watch'] = variable_set.url_to_watch
-
-            return result_dict
-
-        return {}
+            return {}
+        return getSetIDDict(env_variables, setid)

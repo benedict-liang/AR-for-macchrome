@@ -7,7 +7,7 @@ from selenium import webdriver
 from urllib2 import URLError
 from list_env_var import ListEnvVar
 
-def setupDriver():
+def setupDriver(setid):
     """
     Sets up ChromeDriver.
     If ChromeDriver path does not exist,
@@ -18,10 +18,14 @@ def setupDriver():
         print "Please run 'python add_env_var.py' first."
         sys.exit(1)
 
-    f = open("EnvFile", "rb")
-    path = f.readline()
-    url_path = f.readline()
-    f.close()
+#    f = open("EnvFile", "rb")
+#    path = f.readline()
+#    url_path = f.readline()
+#    f.close()
+
+    env_var_dict = ListEnvVar.getEnvVarDict("EnvFile", setid)
+    path = env_var_dict['chromedriver_path']
+    url_path = env_var_dict['url_to_watch']
 
     chromedriver_abspath = os.path.abspath(path.strip())
     if not os.path.exists(chromedriver_abspath):
@@ -43,8 +47,8 @@ def callback(event):
 
 # Main Procedure
 def main():
-    if len(sys.argv) != 2:
-        print "Usage: %s FilePath" % sys.argv[0]
+    if len(sys.argv) != 3:
+        print "Usage: %s FilePath SetID" % sys.argv[0]
         sys.exit(1)
 
     path = sys.argv[1]
@@ -53,7 +57,7 @@ def main():
         sys.exit(1)
 
     global driver
-    driver = setupDriver()
+    driver = setupDriver(sys.argv[2])
 
     observer = Observer()
     stream = Stream(callback, os.path.abspath(path), file_events=True)

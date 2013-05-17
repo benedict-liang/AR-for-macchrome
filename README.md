@@ -1,2 +1,4 @@
-autorefresh-for-macchrome
-=========================
+Auto Refresh for Chrome on Mac
+==============================
+
+

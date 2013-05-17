@@ -64,6 +64,7 @@ def main():
     try:
         # yields to allow Ctrl-C to be captured
         while True:
+            # sleep saves CPU cycles
             time.sleep(1)
     except KeyboardInterrupt:
         print "\nQuitting program gracefully"

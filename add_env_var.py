@@ -16,6 +16,14 @@ def main():
 
     env_variables = environmentvariables_pb2.EnvironmentVariables()
 
+    # Read the existing address book.
+    try:
+        f = open("EnvFile", "rb")
+        env_variables.ParseFromString(f.read())
+        f.close()
+    except IOError:
+         print "Creating new EnvFile."
+
     # Add a variable set
     PromptForVariables(env_variables.variableset.add())
 

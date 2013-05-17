@@ -18,11 +18,6 @@ def setupDriver(setid):
         print "Please run 'python add_env_var.py' first."
         sys.exit(1)
 
-#    f = open("EnvFile", "rb")
-#    path = f.readline()
-#    url_path = f.readline()
-#    f.close()
-
     env_var_dict = ListEnvVar.getEnvVarDict("EnvFile", setid)
     path = env_var_dict['chromedriver_path']
     url_path = env_var_dict['url_to_watch']
